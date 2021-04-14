@@ -1,0 +1,10 @@
+{
+    "development": {
+        "database": "d4ghlvo64ke4qu",
+        "username": "hkutmvzyxmhvgq",
+        "password": "9ee6e43f70c458f77ecf452a356dacabbd802a0296244cdc50ce4474ca92ad21",
+        "host": "ec2-54-225-130-212.compute-1.amazonaws.com",
+        "dialect": "postgres",
+        "key": "MySuP3R_z3kr3t."
+    }
+}
