@@ -7,17 +7,26 @@ const isAuth = require("../middlewares/isAuth");
 const attachCurrentUser = require("../middlewares/attachCurrentUser");
 const { sequelize, Club } = require("../models/index");
 const { token } = require("morgan");
+const multer = require("multer");
 
 
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, "./posters");
+    },
+    filename: function(req, file, cb) {
+        cb(null, Date.now() + "-" + file.originalname);
+    },
+});
 
-router.post('/create', async(req, res) => {
+var upload = multer({ storage: storage });
+
+router.post('/create', upload.single("evPoster"), async(req, res) => {
     try {
-        // console.log("*************************", res.token)
-        // const ClubId = req.token.data.club_id
-        const { evTitle, evDescription, evDate } = req.body;
         const addEvent = await DB.Evenement.create({
             evTitle: req.body.evTitle,
             evDescription: req.body.evDescription,
+            evPoster: req.file.path,
             evDate: req.body.evDate,
             ClubId: req.body.ClubId
         });
@@ -52,7 +61,7 @@ router.post('/list', async(req, res) => {
             ]
 
         });
-        console.log("**********************************" + events)
+        console.log("******************************************************" + events)
         res.send(events);
     } catch (err) {
         console.log(err)
@@ -62,13 +71,14 @@ router.post('/list', async(req, res) => {
 
 router.post('/listone/:id', async(req, res) => {
     try {
-        // var { filter = {} } = req.body;
-        // var club = filter.ClubId || null;
-        console.log("***************************************************")
+
+
         const event = await DB.Evenement.findAll({
 
             where: {
                 id: req.params.id,
+
+
             },
             include: [
 

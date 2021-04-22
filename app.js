@@ -26,6 +26,11 @@ app.get("/logos/:name", function(req, res) {
     console.log(path.join(__dirname + `/logos/${req.params.name}`));
     res.sendFile(path.join(__dirname + `/logos/${req.params.name}`));
 });
+
+app.get("/posters/:name", function(req, res) {
+    console.log(path.join(__dirname + `/posters/${req.params.name}`));
+    res.sendFile(path.join(__dirname + `/posters/${req.params.name}`));
+});
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");

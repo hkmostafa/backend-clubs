@@ -42,7 +42,10 @@ db.Slideshow.belongsTo(db.Club)
 db.Club.hasOne(db.Membership)
     // db.User.hasOne(db.respClub)
     // db.Club.hasOne(db.respClub)
-
+db.Club.hasOne(db.respClub)
+db.respClub.belongsTo(db.Club)
+db.User.hasOne(db.respClub)
+db.respClub.belongsTo(db.User)
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

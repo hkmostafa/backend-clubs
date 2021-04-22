@@ -23,13 +23,12 @@ var upload = multer({ storage: storage });
 
 router.post('/create', upload.single("logo"), async(req, res) => {
     try {
-        const { club_name, logo, description, responsablePeda, responsableClub, email, facebook, instagram } = req.body;
+        console.log(req.file.path.replace("\\", "/"))
         const addClub = await DB.Club.create({
             club_name: req.body.club_name,
-            logo: req.file.path,
+            logo: req.file.path.replace("\\", "/"),
             color: req.body.color,
             description: req.body.description,
-            responsablePeda: req.body.responsablePeda,
             responsableClub: req.body.responsableClub,
             email: req.body.email,
             facebook: req.body.facebook,
@@ -46,7 +45,7 @@ router.post('/create', upload.single("logo"), async(req, res) => {
 router.get('/list', async(req, res) => {
     try {
         var { filter = {}, offset = 0, limit = 20 } = req.body;
-        var club = filter.id || null;
+
         const clubs = await DB.Club.findAll({
             offset,
             limit,
