@@ -5,18 +5,15 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
 var indexRouter = require("./routes/index");
-var authRouter = require("./routes/auth");
-var mmbRouter = require("./routes/members");
 var respRouter = require("./routes/responsables");
 var clubRouter = require("./routes/clubs");
-var reunionRouter = require("./routes/reunion");
 var db = require(__dirname + "/models/index");
 var eventRouter = require('./routes/events');
 var membershipRouter = require('./routes/membership');
 
 // Sync the database models
 db.sequelize.sync({
-    //force: true
+    //  force: true
 });
 
 var app = express();
@@ -42,11 +39,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/members", mmbRouter);
-app.use("/auth", authRouter);
 app.use("/responsables", respRouter);
 app.use("/clubs", clubRouter);
-app.use("/reunion", reunionRouter);
 app.use("/events", eventRouter);
 app.use('/membership', membershipRouter);
 
@@ -67,6 +61,6 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render("error");
 });
-console.log("hiiiiiiiiiiii")
+console.log("*************************************")
 
 module.exports = app;

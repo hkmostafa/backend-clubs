@@ -1,10 +1,6 @@
 var express = require("express");
 const router = require('express').Router();
 const DB = require("../models/index");
-const { Op } = require("sequelize");
-const checkRole = require("../middlewares/checkRole");
-const isAuth = require("../middlewares/isAuth");
-const attachCurrentUser = require("../middlewares/attachCurrentUser");
 const { sequelize, Club } = require("../models/index");
 const multer = require("multer");
 
@@ -23,7 +19,6 @@ var upload = multer({ storage: storage });
 
 router.post('/create', upload.single("logo"), async(req, res) => {
     try {
-        console.log(req.file.path.replace("\\", "/"))
         const addClub = await DB.Club.create({
             club_name: req.body.club_name,
             logo: req.file.path.replace("\\", "/"),
@@ -44,21 +39,11 @@ router.post('/create', upload.single("logo"), async(req, res) => {
 
 router.get('/list', async(req, res) => {
     try {
-        var { filter = {}, offset = 0, limit = 20 } = req.body;
+        var { offset = 0, limit = 20 } = req.body;
 
         const clubs = await DB.Club.findAll({
             offset,
-            limit,
-            where: {
-
-            },
-
-            include: [
-
-                { model: DB.Slideshow, required: false },
-
-            ]
-
+            limit
         });
         res.send(clubs);
     } catch (e) {
@@ -75,20 +60,8 @@ router.get('/listone/:id', async(req, res) => {
         const club = await DB.Club.findAll({
             where: {
                 id: req.params.id,
-                // offset,
-                // limit,
-                // where: filter.id ? {
-                //     [Op.eq]: filter.id
-                // } : {
-                //     [Op.eq]: null
-                // },
-
-
             },
-            include: [
 
-                { model: DB.Slideshow, required: false }
-            ]
         });
         res.send(club);
 
