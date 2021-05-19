@@ -28,6 +28,7 @@ router.post('/create', upload.single("evPoster"), async(req, res) => {
             evDescription: req.body.evDescription,
             evPoster: req.file.path,
             evDate: req.body.evDate,
+            evTime: req.body.evTime,
             ClubId: req.body.ClubId
         });
         res.send(addEvent);
@@ -55,9 +56,7 @@ router.post('/list', async(req, res) => {
 
             },
             include: [
-
                 { model: DB.Club, required: true },
-
             ]
 
         });
@@ -96,7 +95,7 @@ router.post('/listone/:id', async(req, res) => {
 
 
 
-router.post('/delete/', isAuth, attachCurrentUser, checkRole("resp"), async(req, res) => {
+router.post('/delete/', async(req, res) => {
     try {
         console.log("Deleting event...")
         DB.Evenement.destroy({

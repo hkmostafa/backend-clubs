@@ -20,7 +20,7 @@ var upload = multer({ storage: storage });
 router.post('/create', upload.single("logo"), async(req, res) => {
     try {
         const addClub = await DB.Club.create({
-            club_name: req.body.club_name,
+            clubName: req.body.clubName,
             logo: req.file.path.replace("\\", "/"),
             color: req.body.color,
             description: req.body.description,

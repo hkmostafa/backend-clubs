@@ -8,7 +8,7 @@ router.post('/apply', async(req, res) => {
 
         const applyClub = await db.Membership.create({
             name: req.body.name,
-            last_name: req.body.last_name,
+            lastName: req.body.lastName,
             email: req.body.email,
             phone: req.body.phone,
             faculty: req.body.faculty,

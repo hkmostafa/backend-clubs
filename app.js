@@ -5,7 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
 var indexRouter = require("./routes/index");
-var respRouter = require("./routes/responsables");
+
 var clubRouter = require("./routes/clubs");
 var db = require(__dirname + "/models/index");
 var eventRouter = require('./routes/events');
@@ -39,7 +39,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/responsables", respRouter);
 app.use("/clubs", clubRouter);
 app.use("/events", eventRouter);
 app.use('/membership', membershipRouter);
