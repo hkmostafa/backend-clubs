@@ -1,10 +1,10 @@
 {
     "development": {
-        "database": "d467sp5tuj9s2v",
-        "username": "xeciuteypcaplr",
-        "password": "50c748d084df8ae6504adbda8193f0e2437ef3c986b8a7b5c3501ff9cce7ac51",
-        "host": "ec2-3-220-98-137.compute-1.amazonaws.com",
-        "dialect": "postgres",
-        "key": "MySuP3R_z3kr3t."
+        "database": "parauni",
+        "username": "parauni",
+        "password": "password",
+        "host": "localhost",
+        "dialect": "mysql"
+
     }
 }
