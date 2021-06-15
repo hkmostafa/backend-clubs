@@ -30,8 +30,8 @@ router.post('/apply', async(req, res) => {
         const authServiceInstance = new AuthService();
         authServiceInstance.sendmail({
             from: "este.parauni@gmail.com",
-            subject: `Candidature de ${req.body.name} ${req.body.last_name}`,
-            text: `${req.body.name} ${req.body.last_name} a rempli le formulaire pour joindre le ${respmail.Club.club_name}! `,
+            subject: `Candidature de ${req.body.name} ${req.body.lastName}`,
+            text: `${req.body.name} ${req.body.lastName} a rempli le formulaire pour joindre le ${respmail.Club.clubName}! `,
             to: respmail.User.email
         });
 

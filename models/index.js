@@ -22,7 +22,8 @@ const sequelize = new Sequelize(
 var db = {};
 
 
-
+db['User'] = require('./user')(sequelize, Sequelize.DataTypes);
+db['respClub'] = require('./respClub')(sequelize, Sequelize.DataTypes);
 db['Evenement'] = require('./evenement')(sequelize, Sequelize.DataTypes);
 db['Club'] = require('./club')(sequelize, Sequelize.DataTypes);
 db['Membership'] = require('./membership')(sequelize, Sequelize.DataTypes);
@@ -30,6 +31,10 @@ db['Membership'] = require('./membership')(sequelize, Sequelize.DataTypes);
 
 db.Club.hasMany(db.Evenement);
 db.Evenement.belongsTo(db.Club);
+db.Club.hasOne(db.respClub);
+db.respClub.belongsTo(db.Club);
+db.User.hasOne(db.respClub);
+db.respClub.belongsTo(db.User);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
